@@ -8,7 +8,6 @@ import './App.css'
 class BooksApp extends React.Component {
   constructor(props) {
     super(props)
-
     this.state = {
       books: [],
       shelves: [
@@ -32,6 +31,7 @@ class BooksApp extends React.Component {
     }
 
     this.changeShelf = this.changeShelf.bind(this);
+    this.addBook = this.addBook.bind(this);
   }
 
   componentDidMount() {
@@ -40,11 +40,21 @@ class BooksApp extends React.Component {
   
   changeShelf = (book, shelf) => {
     let books = this.state.books;
-    let index = books.findIndex((element) => element.title === book.title);
+    let index = books.findIndex((element) => element.id === book.id);
+    if (index === -1 ) {
+      books.push(book);
+      index = books.findIndex((element) => element.id === book.id);
+    }    
     books[index].shelf = shelf;
-    BooksAPI.update(books[index], shelf);
+    BooksAPI.update(book, shelf);
     this.setState({
       books: books,
+    })
+  }
+
+  addBook = (book) => {
+    this.setState({
+      books: this.state.books.concat(book),
     })
   }
 
@@ -52,7 +62,7 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Route exact path='/' render={() => (<BookList changeShelf={this.changeShelf} books={this.state.books} shelves={this.state.shelves} />)} />
-        <Route path='/search' render={() => (<SearchBooks changeShelf={this.changeShelf} shelves={this.state.shelves}/>)} />
+        <Route path='/search' render={() => (<SearchBooks addBook={this.addBook} changeShelf={this.changeShelf} shelves={this.state.shelves}/>)} />
       </div>
     )
   }

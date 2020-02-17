@@ -9,7 +9,7 @@ class Bookshelf extends Component {
                 <h2 className="bookshelf-title">{shelf.label}</h2>
                 <div className="bookshelf-books">
                     <ol className="books-grid">
-                        {books.filter(book => book.shelf === shelf.key).map(book => <Book changeShelf={changeShelf} key={book.title} shelves={shelves} book={book}/>)}
+                        {books.filter(book => book.shelf === shelf.key).map(book => <Book changeShelf={changeShelf} key={book.id} shelves={shelves} book={book}/>)}
                     </ol>
                 </div>
             </div>

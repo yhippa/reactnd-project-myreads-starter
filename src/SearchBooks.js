@@ -8,7 +8,8 @@ class SearchBooks extends Component {
         super(props);
 
         this.state = {
-            books: []
+            books: [],
+            searchTerm: '',
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -20,7 +21,6 @@ class SearchBooks extends Component {
 
     render() {
         const { changeShelf, shelves } = this.props;
-        BooksAPI.search('fin').then(result => console.log(result));
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -36,13 +36,13 @@ class SearchBooks extends Component {
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-                        <input type="text" placeholder="Search by title or author" onChange={this.handleChange} />
+                        <input type="text" placeholder="Search by title or author" value={this.searchTerm} onChange={this.handleChange} />
 
                     </div>
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        {this.state.books.map(book => <Book changeShelf={changeShelf} key={book.title} shelves={shelves} book={book}/>)}
+                        {this.state.books.length > 0 ? this.state.books.map(book => <Book changeShelf={changeShelf} key={book.id} shelves={shelves} book={book}/>) : ''}
                     </ol>
                 </div>
             </div>

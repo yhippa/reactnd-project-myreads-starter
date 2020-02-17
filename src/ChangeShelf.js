@@ -12,6 +12,7 @@ class ChangeShelf extends Component {
     }
 
     handleChange = event => {
+        console.log('event.target.value', event.target.value)
         this.setState({
             value: event.target.value,
         });
@@ -22,17 +23,14 @@ class ChangeShelf extends Component {
         const { shelves } = this.props;
         return (
             <div className="book-shelf-changer">
-                <select onChange={this.handleChange} value={this.state.value}>
-                    <option value="move" disabled>Move to...</option>
-                    {shelves.map(shelf => <ShelfOption key={shelf.key} shelf={shelf} />)}
+                {console.log(this.state.value)}
+                <select value={this.state.value} onChange={this.handleChange}>
+                    <option value='move'>Move to...</option>
+                    {shelves.map(shelf => <option key={shelf.key} value={shelf.key}>{shelf.label}</option>)}
                 </select>
             </div>
         )
     }
-}
-
-function ShelfOption(props) {
-    return <option value={props.shelf.key}>{props.shelf.label}</option>;
 }
 
 export default ChangeShelf
