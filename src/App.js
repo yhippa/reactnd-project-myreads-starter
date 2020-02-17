@@ -73,12 +73,23 @@ class BooksApp extends React.Component {
         },
       ]
     }
+
+    this.changeShelf = this.changeShelf.bind(this);
   }
   
+  changeShelf = (book, shelf) => {
+    let books = this.state.books;
+    let index = books.findIndex((element) => element.title === book.title);
+    books[index].shelf = shelf;
+    this.setState({
+      books: books,
+    })
+  }
+
   render() {
     return (
       <div className="app">
-        <Route exact path='/' render={() => (<BookList books={this.state.books} shelves={this.state.shelves} />)} />
+        <Route exact path='/' render={() => (<BookList changeShelf={this.changeShelf} books={this.state.books} shelves={this.state.shelves} />)} />
         <Route path='/search' component={SearchBooks} />
       </div>
     )
