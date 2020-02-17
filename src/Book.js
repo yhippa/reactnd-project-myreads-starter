@@ -8,7 +8,7 @@ class Book extends Component {
             <li>
                 <div className="book">
                     <div className="book-top">
-                        <div className="book-cover" style={{ width: '100%', height: '100%', backgroundImage:`url(${book.imageLinks.smallThumbnail})` }}></div>
+                        <div className="book-cover" style={{ width: '100%', height: '100%', backgroundImage:`url(${book.imageLinks ? book.imageLinks.smallThumbnail : ''})` }}></div>
                         <ChangeShelf book={book} changeShelf={changeShelf} shelves={shelves}/>                        
                     </div>
                     <div className="book-title">{book.title}</div>
