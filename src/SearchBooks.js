@@ -16,7 +16,7 @@ class SearchBooks extends Component {
     }
 
     handleChange(event) {
-        (event.target.value) ? BooksAPI.search(event.target.value).then(books => this.setState({books})) : console.log()
+        (event.target.value) ? BooksAPI.search(event.target.value).then(books => this.setState({books})) : this.setState({books: []})
     }
 
     render() {

@@ -23,7 +23,6 @@ class ChangeShelf extends Component {
         const { shelves } = this.props;
         return (
             <div className="book-shelf-changer">
-                {console.log(this.state.value)}
                 <select value={this.state.value} onChange={this.handleChange}>
                     <option value='move'>Move to...</option>
                     {shelves.map(shelf => <option key={shelf.key} value={shelf.key}>{shelf.label}</option>)}
