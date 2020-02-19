@@ -5,7 +5,7 @@ class ChangeShelf extends Component {
         super(props);
 
         this.state = {
-            value: 'move'
+            value: props.book.shelf ? props.book.shelf : 'none'
         }
 
         this.handleChange = this.handleChange.bind(this);
